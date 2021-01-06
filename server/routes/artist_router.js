@@ -17,8 +17,17 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    
-    res.sendStatus(201);
+    console.log(req.body);
+    const queryText =  `INSERT INTO "artists"("name", "birthdate")
+    VALUES ($1, $2);`;
+    pool.query(queryText, [req.body.name, req.body.birthdate])
+        .then((result) => {
+            console.log(result);
+            res.sendStatus(201);
+        }).catch((error) =>{
+            console.log(error);
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
