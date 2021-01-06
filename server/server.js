@@ -12,17 +12,11 @@ app.use(express.static('server/public'));
 let artistRouter = require('./routes/artist_router.js');
 app.use('/artist', artistRouter);
 
+// '/song' route
+let songRouter = require('./routes/song_router.js')
+app.use('/song', songRouter);
 
-//to move to song_router.js
-app.get('/song', (req, res) => {
-    console.log(`In /songs GET`);
-    res.send(songList);
-});
 
-app.post('/song', (req, res) => {
-    songList.push(req.body);
-    res.sendStatus(201);
-});
 
 
 app.listen(PORT, () => {
