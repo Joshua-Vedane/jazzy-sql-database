@@ -3,7 +3,6 @@ const router = express.Router();
 const pool = require('../modules/pool.js');
 
 router.get('/', (req, res) => {
-    console.log(`In /songs GET`);
     const queryText = `SELECT * FROM "artists"`;
     pool.query(queryText)
         .then((result) => {

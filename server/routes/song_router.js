@@ -7,12 +7,30 @@ const pool = require('../modules/pool.js');
 //to move to song_router.js
 router.get('/', (req, res) => {
     console.log(`In /songs GET`);
-    res.sendStatus(200);
+    const queryText = `SELECT * FROM "song"`;
+    pool.query(queryText)
+        .then((result) => {
+            console.log(result);
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
 });
 
 router.post('/', (req, res) => {
     console.log(`in /songs POST`);
-    res.sendStatus(200);
+    console.log(req.body);
+    const queryText = `INSERT INTO "song"("title", "length", "released")
+    VALUES ($1, $2, $3);`
+    pool.query(queryText, [req.body.title, req.body.length, req.body.released])
+        .then((result) => {
+            console.log(result);
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
 });
 
 
