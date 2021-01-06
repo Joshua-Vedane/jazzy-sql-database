@@ -8,7 +8,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('server/public'));
 
 // '/artist' route
-
 let artistRouter = require('./routes/artist_router.js');
 app.use('/artist', artistRouter);
 
@@ -16,9 +15,7 @@ app.use('/artist', artistRouter);
 let songRouter = require('./routes/song_router.js')
 app.use('/song', songRouter);
 
-
-
-
+//ZOOM ZOOM 
 app.listen(PORT, () => {
     console.log('listening on port', PORT)
 });
