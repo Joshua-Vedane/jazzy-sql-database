@@ -7,7 +7,7 @@ const pool = require('../modules/pool.js');
 //to move to song_router.js
 router.get('/', (req, res) => {
     console.log(`In /songs GET`);
-    const queryText = `SELECT * FROM "song"`;
+    const queryText = `SELECT * FROM "song" ORDER BY "title";`;
     pool.query(queryText)
         .then((result) => {
             console.log(result);
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
     console.log(`in /songs POST`);
     console.log(req.body);
     const queryText = `INSERT INTO "song"("title", "length", "released")
-    VALUES ($1, $2, $3);`
+    VALUES ($1, $2, $3);`;
     pool.query(queryText, [req.body.title, req.body.length, req.body.released])
         .then((result) => {
             console.log(result);
